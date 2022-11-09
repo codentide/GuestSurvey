@@ -96,7 +96,7 @@ class verticalRange extends HTMLElement {
         <div class="range-item">
             <input class="slider"  type="range" step="1" min="0" max="100"  value="50">
             <div class="selector" >
-                    <div class="select-button"><span>${this.icon}</span></div>
+                    <div class="select-button" disabled><span>${this.icon}</span></div>
             </div>
             </div>
                   

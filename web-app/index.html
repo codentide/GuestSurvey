@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" user-scalable="0" content="width=device-width, initial-scale=1 " />
+    
+
     <title>GuestSurvey</title>
 
     <link rel="stylesheet" href="style.css">
@@ -12,16 +14,82 @@
 <body>
 
     <main>
-        <!-- En "icon" puede insertar cualquier emoji que quiera parce😄 
-        aqui le dejo algunos para que pruebe
-        🍻 🧠 🧼 🐯 🏹  🐶-->
 
-        <wc-v-range icon="🐯"></wc-v-range>
-        
-    
-        <wc-h-range icon="🐶"></wc-h-range>
+        <section class="range-container">
+
+            <ul class="range-list">
+
+                <li><input type="range" class="range-item"></li>
+                <li><input type="range" class="range-item"></li>
+                <li><input type="range" class="range-item"></li>
+                <li><input type="range" class="range-item"></li>
+                <li><input type="range" class="range-item"></li>
+                <li><input type="range" class="range-item"></li>
+                
+            </ul>
+
+        </section>
+        <section class="mid-container">
+
+            <input type="range" class="range-item self">
+
+        </section>
+        <section class="emoji-container">
+
+            <button class="emoji-button">😆</button>
+            <button class="emoji-button">😃</button>
+            <button class="emoji-button">😆</button>
+            <button class="emoji-button">🙃</button>
+            <button class="emoji-button">😍</button>
+            <button class="emoji-button">🥰</button>
+            <button class="emoji-button">😇</button>
+            <button class="emoji-button">🤗</button>
+            <button class="emoji-button">🤨</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😆</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">🥰</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😍</button>
+            <button class="emoji-button">😇</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😇</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😇</button>
+            <button class="emoji-button">🥰</button>
+            <button class="emoji-button">😍</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">🥰</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😆</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😍</button>
+            <button class="emoji-button">😊</button>
+            <button class="emoji-button">😆</button>
+            
+
+        </section>
+
     </main>
 
+
+
+
+
+
+
+   <!-- En "icon" puede insertar cualquier emoji que quiera parce😄 
+        aqui le dejo algunos para que pruebe
+        🍻 🧠 🧼 🐯 🏹  🐶
+ 
+        <wc-h-range  icon="🧼"></wc-h-range>
+        <wc-h-range  icon="🧼"></wc-h-range> -->
+    
 
     <script src="./wc-range-bar/wc-init.component.js"></script>
     <script src="./wc-range-bar/vertical-range.component.js"></script>
