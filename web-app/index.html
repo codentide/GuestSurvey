@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" user-scalable="0" content="width=device-width, initial-scale=1 " />
-    
+
 
     <title>GuestSurvey</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./Happy-Emoji-PNG-Image-Background.png" type="image/x-icon">
 </head>
+
 <body>
 
     <main>
 
         <section class="range-container">
 
-            <ul class="range-list">
+            <ul id="session-list" class="range-list">
 
-                <li><input type="range" class="range-item"></li>
-                <li><input type="range" class="range-item"></li>
-                <li><input type="range" class="range-item"></li>
-                <li><input type="range" class="range-item"></li>
-                <li><input type="range" class="range-item"></li>
-                <li><input type="range" class="range-item"></li>
-                
+                <!-- <li><input type="range" class="range-item session-level-input"></li>
+                <li><input type="range" class="range-item session-level-input"></li>
+                <li><input type="range" class="range-item session-level-input"></li>
+                <li><input type="range" class="range-item session-level-input"></li>
+                <li><input type="range" class="range-item session-level-input"></li>
+                <li><input type="range" class="range-item session-level-input"></li> -->
+
             </ul>
 
         </section>
         <section class="mid-container">
 
-            <input type="range" class="range-item self">
+            <input id="my-level-input" type="range" class="range-item self">
 
         </section>
         <section class="emoji-container">
@@ -71,28 +73,156 @@
             <button class="emoji-button">😍</button>
             <button class="emoji-button">😊</button>
             <button class="emoji-button">😆</button>
-            
+
 
         </section>
 
     </main>
 
 
-
-
-
-
-
-   <!-- En "icon" puede insertar cualquier emoji que quiera parce😄 
+    <!-- En "icon" puede insertar cualquier emoji que quiera parce😄 
         aqui le dejo algunos para que pruebe
         🍻 🧠 🧼 🐯 🏹  🐶
  
         <wc-h-range  icon="🧼"></wc-h-range>
         <wc-h-range  icon="🧼"></wc-h-range> -->
-    
+
 
     <script src="./wc-range-bar/wc-init.component.js"></script>
     <script src="./wc-range-bar/vertical-range.component.js"></script>
     <script src="./wc-range-bar/horizontal-range.component.js"></script>
+
+    <!-- This line is from index.js, is used to import external modules -->
+    <script src="./bundle.js"></script>
+
+    <script>
+        const { log, error, warn } = console
+        /** @returns HTMLElement */
+        const getElement = selector => document.querySelector(selector)
+        const getElements = selector => document.querySelectorAll(selector)
+    </script>
+
+    <script>
+        const { Amplify, API, graphqlOperation } = window.modules['aws-amplfy']
+        console.log(window.modules['aws-amplfy'])
+        const appConfig = {
+            aws_appsync_graphqlEndpoint: "https://etqor7oilndspncbfezvjt27he.appsync-api.us-west-2.amazonaws.com/graphql",
+            aws_appsync_region: "us-east-2",
+            aws_appsync_authenticationType: "API_KEY",
+            aws_appsync_apiKey: "da2-qrzngj3sx5f3xm76bg5ggxso6e",
+        }
+
+        log(appConfig)
+
+        console.log(appConfig)
+        Amplify.configure(appConfig)
+
+
+        function rungql(query) {
+            return API.graphql(graphqlOperation(query))
+        }
+
+
+        const gql = function (templates, ...values) {
+            let str = ''
+            templates.forEach((template, index) => {
+                str += template
+                str = values[index] ? str + values[index] : str
+            })
+            return str.trim()
+        }
+
+
+        async function listSessions() {
+            const query = gql`query MyQuery {
+                getUserSessions {
+                    id
+                    level
+                    recordType
+                }
+            }
+            `
+            const sessions = await rungql(query)
+            console.log(sessions)
+            return sessions.data.getUserSessions
+        }
+
+
+        async function sendMutation(id, level, recordType) {
+            const query = gql`mutation MyMutation {
+                createSession(id: {id: "${id}", level: "${level}", recordType: "${recordType}"}) {
+                id
+                level
+                recordType
+                }
+            }`
+            console.log(query)
+            const res = await rungql(query)
+        }
+
+
+        function subscribe(fn) {
+            log('subscribing')
+            const query = gql`subscription MySubscription {
+                onCreateSession {
+                id
+                level
+                recordType
+                }
+            }`
+            const subscription = rungql(query)
+            subscription.subscribe({
+                next: event => fn(event)
+            })
+            // return subscription.unsubscribe
+        }
+
+        function getId() {
+            return 'diego'
+            // return document.querySelector('#id').value
+        }
+
+        async function createSession(id, level) {
+            return sendMutation(id, level, 'session')
+        }
+
+    </script>
+
+    <script>
+        async function run() {
+            log('listing sessions')
+            const sessions = (await listSessions())
+            log(sessions)
+            const sessionList = getElement('#session-list')
+            log(sessionList)
+            sessions
+                .filter(session => session.recordType === 'session')
+                .map(session => html`<li><input value="${session.level}" id="session-id-${session.id}"  type="range" class="range-item session-level-input"></li>`)
+                .map(li => {
+                    return li
+                })
+                .forEach(li => sessionList.appendChild(li))
+
+            const myLevel = getElement('#my-level-input')
+
+            myLevel.addEventListener('change', event => {
+                const id = getId()
+                log(id, event)
+                createSession(id, event.target.value)
+            })
+
+
+            subscribe(async event => {
+                const item = event.value.data.onCreateSession
+                const sessionTarget = getElement(`#session-id-${item.id}`)
+                sessionTarget.value = item.level
+            })
+
+        }
+
+        run()
+    </script>
+
 </body>
+
 </html>

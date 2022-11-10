@@ -1,0 +1,29 @@
+{
+  "name": "guestsurvey",
+  "version": "1.0.0",
+  "description": "use to anonimously surver a virtual meeting",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoDelBoccio/GuestSurvey.git"
+  },
+  "author": "Marco Del Boccio, Diego Torres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcoDelBoccio/GuestSurvey/issues"
+  },
+  "homepage": "https://github.com/marcoDelBoccio/GuestSurvey#readme",
+  "devDependencies": {
+    "browserify": "^17.0.0"
+  },
+  "dependencies": {
+    "aws-amplify": "^4.3.43"
+  }
+}
