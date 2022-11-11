@@ -1,6 +1,6 @@
 :root{
-    --main-light: #727ab8;
-    --main-color: #5463d2;
+    --main-light: #757779;
+    --main-color: #b8710d;
 
     --back-one:#121212;
     --back-two:#252525;
@@ -25,16 +25,14 @@ main{
     flex-direction: column;
 
     padding: 12px;
-
-    width: 100%;
-    max-width: 600px;
     height: 100%;
+    max-width: 600px;
 }
 main section:not(:last-of-type){
     margin-bottom: 12px;
 }
 /* Inicializando containers */
-.range-container, .mid-container,.emoji-container{
+.range-container, .mid-container,.bot-container{
     width: 100%;
 
     padding: 24px;
@@ -42,28 +40,32 @@ main section:not(:last-of-type){
 }
 /* Range container */
 .range-container{
-   
-    height: 30%;
+
+    height: 44%;
     background-color: var(--main-light);
+
+
 }
 .range-list{
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 
-    width: 100%;
-    height: 100%;
+    width:90%;
+    height: 100%;  
 
     list-style: none;
+    background-color: transparent;
 
-    
-
+    transform: rotate(90deg);
 }
 /* Style range */
 
 li{
-    width: 100%;
+    width: calc(100%/5); 
+    height: 0%;
 }
 .range-item{
     -webkit-appearance: none;
@@ -94,7 +96,7 @@ li{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 10%;
+    height: 16%;
 
     background-color: var(--back-one);
     outline: none;
@@ -109,20 +111,24 @@ li{
 } 
 
 /* Emoji container */
+.bot-container{
+    height:40%;
+    background-color: var(--main-light);
+}
 .emoji-container{
     display: grid;
     grid-template-columns: repeat(5,auto);
     place-items: center;
-    height:60%;
 
-    background-color: var(--main-light);
+    overflow-y: auto;
+    height: 100%;
 }
 .emoji-button{
     padding: 4px;
     margin: 8px;
     font-size: 18px;
 
-    background:rgb(189, 189, 198);
+    background:var(--medium-emphasis);
     border: 4px solid var(--high-emphasis);
     border-radius: 12px;
 
@@ -132,4 +138,9 @@ li{
 }
 .emoji-button:active{
     transform: scale(0.90);
+}
+/* Vertical */
+.vertical{
+    -webkit-transform:rotate(180deg); 
+    
 }
