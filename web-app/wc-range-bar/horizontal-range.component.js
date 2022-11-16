@@ -25,7 +25,7 @@ class horizontalRange extends HTMLElement {
             }
             .range-item{
                 width: 200px;
-                transform: rotate(0deg);
+                -webkit-transform:rotate(0deg);
             }
             .slider{
                 -webkit-appearance: none;
@@ -60,7 +60,7 @@ class horizontalRange extends HTMLElement {
                 position: absolute;
                 bottom: -28%;
                 left: 50%;
-                transform: translateX(-30%);
+                -webkit-transform: translateX(-30%);
                 z-index: 2;
             }
 
@@ -82,7 +82,7 @@ class horizontalRange extends HTMLElement {
             }
 
             span{
-                transform: rotate(0deg);
+                
                 padding-bottom: 2px;
             }
             .range-item:active .select-button {
